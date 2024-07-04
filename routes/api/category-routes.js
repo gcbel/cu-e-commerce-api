@@ -12,10 +12,16 @@ router.get('/', async (req, res) => {
     res.status(200).json(category);
   } catch (err) {res.status(400).json(err)}
 });
-
-router.get('/:id', (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+/* Get route to  /api/categories/:id, finds a category by id and associated products */
+router.get('/:id', async (req, res) => {
+  try {
+    const category = await Category.findbyPk(req.params.id)
+    if (!category) {
+      res.status(404).json({ message: 'No category with this id!' });
+      return;
+    }
+    res.status(200).json(category);
+  } catch (err) {res.status(400).json(err)}
 });
 
 /* Post route to /api/categories, creates a new category */
