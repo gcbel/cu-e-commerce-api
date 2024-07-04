@@ -22,7 +22,9 @@ This application allows a user to add and delete departments, roles, and employe
 
 ## Credits
 
-Starter code provided by Columbia University Full-Stack Bootcamp: https://github.com/coding-boot-camp/bookish-sniffle
+Starter code provided by Columbia University Full-Stack Bootcamp: https://github.com/coding-boot-camp/bookish-sniffle <br>
+Reference for Sequelize models: https://sequelize.org/docs/v6/core-concepts/model-basics/ <br>
+Reference for Sequelize validation: https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 
 ## License
 
