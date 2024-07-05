@@ -4,16 +4,28 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 /* ROUTES */
 /* Get route to /api/products, finds all products and associated category and tags */
-router.get('/', (req, res) => {
-
+router.get('/', async (req, res) => {
+  try {
+  const products = await Product.findall({
+    order: ['product_name'],
+  }) 
+  res.status(200).json(products);
+  } catch (err) {res.status(400).json(err)};
 });
 
 /* Get route to /api/products, finds a product by id and its associated category and tags */
-router.get('/:id', (req, res) => {
-
+router.get('/:id', async (req, res) => {
+  try {
+  const product = Product.findByPk(req.params.id)
+  if (!product) {
+    res.status(404).json({ message: 'No product with this id!' });
+    return;
+  }
+  res.status(200).json(product);
+  } catch (err) {res.status(400).json(err)};
 });
 
-/* Post route to /api/products, creates a new products */
+/* Post route to /api/products, creates a new product */
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {

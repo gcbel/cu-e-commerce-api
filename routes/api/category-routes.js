@@ -3,17 +3,17 @@ const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
 /* ROUTES */
-/* Get route to  /api/categories, finds all categories and associated products */
+/* Get route to /api/categories, finds all categories and associated products */
 router.get('/', async (req, res) => {
   try {
-    const category = await Category.findall({
+    const categories = await Category.findall({
       category_name: req.body.name,
     });
-    res.status(200).json(category);
+    res.status(200).json(categories);
   } catch (err) {res.status(400).json(err)}
 });
 
-/* Get route to  /api/categories/:id, finds a category by id and associated products */
+/* Get route to /api/categories/:id, finds a category by id and associated products */
 router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findbyPk(req.params.id)
