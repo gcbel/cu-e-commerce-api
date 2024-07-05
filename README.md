@@ -14,7 +14,7 @@ To download the package dependencies ([inquirer](https://www.npmjs.com/package/i
 
 ## Usage
 
-First, change the credentials in the config/connection.js to match your Postgres credentials.
+First, add a `.env` file that matches the `.env.EXAMPLE` file, and updated with your Postgres credentials.
 
 To use the database, connect to Postgres using `psql -U postgres`, and once connected to Postgres, run `\i db/schema.sql`. In a separate terminal, the project can be run with `node index` or `node index.js`. The terminal will then prompt the user for desired actions.
 

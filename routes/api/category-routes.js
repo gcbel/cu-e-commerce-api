@@ -1,8 +1,8 @@
+/* DEPENDENCIES */
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
-// The `/api/categories` endpoint
-
+/* ROUTES */
 /* Get route to  /api/categories, finds all categories and associated products */
 router.get('/', async (req, res) => {
   try {
@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(category);
   } catch (err) {res.status(400).json(err)}
 });
+
 /* Get route to  /api/categories/:id, finds a category by id and associated products */
 router.get('/:id', async (req, res) => {
   try {
@@ -66,4 +67,5 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {res.status(500).json(err)}
 });
 
+/* EXPORT */
 module.exports = router;
