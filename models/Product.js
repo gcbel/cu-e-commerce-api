@@ -1,6 +1,8 @@
+/* DEPENDENCIES */
 const { Model, DataTypes } = require('sequelize');  // Import sequelize
 const sequelize = require('../config/connection.js');  // Import database connection
 
+/* CLASS DEFINITION */
 class Product extends Model {}  // Initialize Product model (table) by extending off Sequelize's Model class
 
 Product.init(
@@ -43,4 +45,5 @@ Product.init(
   }
 );
 
+/* EXPORTS */
 module.exports = Product;

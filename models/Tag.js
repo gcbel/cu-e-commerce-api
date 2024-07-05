@@ -1,6 +1,8 @@
+/* DEPENDENCIES */
 const { Model, DataTypes } = require('sequelize');     // Import sequelize
 const sequelize = require('../config/connection.js');  // Import database connection
 
+/* CLASS DEFINITION */
 class Tag extends Model {}  // Initialize Tag model (table) by extending off Sequelize's Model class
 
 Tag.init(
@@ -24,4 +26,5 @@ Tag.init(
   }
 );
 
+/* EXPORTS */
 module.exports = Tag;
