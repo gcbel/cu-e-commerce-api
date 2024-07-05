@@ -1,21 +1,19 @@
+/* DEPENDENCIES */
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
-
-// get all products
+/* ROUTES */
+/* Get route to /api/products, finds all products and associated category and tags */
 router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+
 });
 
-// get one product
+/* Get route to /api/products, finds a product by id and its associated category and tags */
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+
 });
 
-// create new product
+/* Post route to /api/products, creates a new products */
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -47,9 +45,8 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+/* Put route to /api/categories/:id, updates a product by its id value */
 router.put('/:id', (req, res) => {
-  // update product data
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -92,8 +89,10 @@ router.put('/:id', (req, res) => {
     });
 });
 
+/* Delete route for /api/product/:id, deletes a product by its id value */
 router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+
 });
 
+/* EXPORTS */
 module.exports = router;
