@@ -1,10 +1,7 @@
 const { Model, DataTypes } = require('sequelize');  // Import sequelize
 const sequelize = require('../config/connection.js');  // Import database connection
-// const Category = require('./Category.js')
 
 class Product extends Model {}  // Initialize Product model (table) by extending off Sequelize's Model class
-// Product.belongsTo(Catgeory);
-// Product.belongsTo
 
 Product.init(
   {
