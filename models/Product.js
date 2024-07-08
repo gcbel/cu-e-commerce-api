@@ -8,30 +8,30 @@ class Product extends Model {}  // Initialize Product model (table) by extending
 Product.init(
   {
     id: {
-      type: Datatype.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     product_name: {
-      type: Datatype.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: Datatype.DECIMAL,
+      type: DataTypes.DECIMAL,
       allowNull: false,
       isFloat: true,  // Validates decimal
     }, 
     stock: {
-      type: Datatype.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 10,
       isInt: true,  // Validates number
     },
     category_id: {
-      type: Datatype.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
-        model: Category,
+        model: 'category',
         key: 'id',
       }
     }
