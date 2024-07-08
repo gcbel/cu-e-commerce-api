@@ -6,10 +6,10 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 /* Get route to /api/products, finds all products and associated category and tags */
 router.get('/', async (req, res) => {
   try {
-  const products = await Product.findall({
-    order: ['product_name'],
-  }) 
-  res.status(200).json(products);
+    const products = await Product.findAll({
+      include: [{model: Category}, {model: Tag}]
+    }) 
+    res.status(200).json(products);
   } catch (err) {res.status(400).json(err)};
 });
 
