@@ -8,21 +8,27 @@ router.get('/', async (req, res) => {
   try {
     const products = await Product.findAll({
       include: [{model: Category}, {model: Tag}]
-    }) 
+    });
+    if (!products) {
+      res.status(404).json({ message: 'No products!' })
+      return;
+    }
     res.status(200).json(products);
-  } catch (err) {res.status(400).json(err)};
+  } catch (err) {res.status(500).json(err)};
 });
 
 /* Get route to /api/products, finds a product by id and its associated category and tags */
 router.get('/:id', async (req, res) => {
   try {
-  const product = Product.findByPk(req.params.id)
+  const product = await Product.findByPk(req.params.id, {
+    include: [{model: Category}, {model: Tag}]
+  });
   if (!product) {
     res.status(404).json({ message: 'No product with this id!' });
     return;
   }
   res.status(200).json(product);
-  } catch (err) {res.status(400).json(err)};
+  } catch (err) {res.status(500).json(err)};
 });
 
 /* Post route to /api/products, creates a new product */

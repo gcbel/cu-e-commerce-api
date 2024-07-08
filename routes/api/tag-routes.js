@@ -20,13 +20,15 @@ router.get('/', async (req, res) => {
 /* Get route for /api/tags, finds a tag by id and its associated product information */
 router.get('/:id', async (req, res) => {
   try {
-    const tag = await Tag.findByPk(req.params.id, {})
+    const tag = await Tag.findByPk(req.params.id, {
+      include: [{model: Product}]
+    })
     if (!tag) {
-      res.status(404).json({ message: 'No tags!' });
+      res.status(404).json({ message: 'No tag with this id!' });
       return;
     }
     res.status(200).json(tag)
-  } catch (err) {res.status(400).json(err)}
+  } catch (err) {res.status(500).json(err)}
 });
 
 /* Post route to /api/tags, creates a new tag */
