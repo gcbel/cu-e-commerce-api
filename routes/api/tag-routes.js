@@ -7,7 +7,8 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const tags = await Tag.findAll({
-      include: [{model: Product}]
+      include: [{model: Product}],
+      order: [['id', 'ASC']]
     });
     if (!tags) {
       res.status(404).json({ message: 'No tags!' })
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
       include: [{model: Product}]
     });
     if (!tag) {
-      res.status(404).json({ message: 'No tag with this id!' });
+      res.status(404).json({ message: 'No tag matches this id!', id: req.params.id });
       return;
     }
     res.status(200).json(tag)
@@ -35,7 +36,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const tag = await Tag.create(req.body)
-    res.status(200).json({ message: 'Success! Tag created.' })
+    res.status(200).json({ message: 'Success! Tag created.', tag: tag })
   } catch (err) {res.status(500).json(err)};
 });
 
@@ -48,26 +49,26 @@ router.put('/:id', async (req, res) => {
       },
     });
     if (!tag[0]) {
-      res.status(404).json({ message: 'No tag with that ID!' })
+      res.status(404).json({ message: 'No tag matches that ID!', id: req.params.id })
       return;
     }
-    res.status(200).json({ message: 'Success! Tag updated.' })
+    res.status(200).json({ message: 'Success! Tag updated.', id: req.params.id })
   } catch (err) {res.status(500).json(err)};
 });
 
 /* Delete route for /api/product/:id, deletes a tag by its id value */
 router.delete('/:id', async (req, res) => {
   try {
-    const tag = await Tag.destroy(req.body, {
+    const tag = await Tag.destroy({
       where: {
         id: req.params.id
       }
     });
-    if (!tag[0]) {
-      res.status(404).json({ message: 'No tag with that ID!' })
+    if (!tag) {
+      res.status(404).json({ message: 'No tag with that ID!', id: req.params.id })
       return;
     }
-    res.status(200).json({ message: 'Success! Tag deleted.' })
+    res.status(200).json({ message: 'Success! Tag deleted.', id: req.params.id })
   } catch (err) {res.status(500).json(err)};
 });
 

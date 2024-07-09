@@ -7,7 +7,8 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const products = await Product.findAll({
-      include: [{model: Category}, {model: Tag}]
+      include: [{model: Category}, {model: Tag}],
+      order: [['id', 'ASC']]
     });
     if (!products) {
       res.status(404).json({ message: 'No products!' })
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
     include: [{model: Category}, {model: Tag}]
   });
   if (!product) {
-    res.status(404).json({ message: 'No product with this id!' });
+    res.status(404).json({ message: 'No product matches this id!', id: req.params.id });
     return;
   }
   res.status(200).json(product);
@@ -46,16 +47,16 @@ router.post('/', (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // If no product tags, just respond
-      res.status(200).json(product);
+      res.status(200).json({ message: 'Success! Product created.', product: product });
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
+    .then((productTagIds) => res.status(200).json({ message: 'Success! Product created.', product_tags: productTagIds }))
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
     });
 });
 
-/* Put route to /api/categories/:id, updates a product by its id value */
+/* Put route to /api/products/:id, updates a product by its id value */
 router.put('/:id', (req, res) => {
   Product.update(req.body, {
     where: {
@@ -92,7 +93,7 @@ router.put('/:id', (req, res) => {
         });
       }
 
-      return res.json(product);
+      return res.json({ message: 'Success! Product updated.', id: req.params.id });
     })
     .catch((err) => {res.status(400).json(err)});
 });
@@ -100,14 +101,14 @@ router.put('/:id', (req, res) => {
 /* Delete route for /api/product/:id, deletes a product by its id value */
 router.delete('/:id', async (req, res) => {
   try {
-    const product = await Product.destroy(req.body, {
+    const product = await Product.destroy({
       where: {id: req.params.id}
     });
-    if (!product || !product[0]) {
-      res.status(404).json({ message: 'No product with that ID!' })
+    if (!product) {
+      res.status(404).json({ message: 'No product matches that ID!', id: req.params.id })
       return;
     }
-    res.status(200).json({ message: 'Success! Product deleted.' })
+    res.status(200).json({ message: 'Success! Product deleted.', id: req.params.id })
   } catch (err) {res.status(500).json(err)};
 });
 

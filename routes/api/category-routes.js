@@ -7,7 +7,8 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const categories = await Category.findAll({
-      include: [{ model: Product }]
+      include: [{ model: Product }],
+      order: [['id', 'ASC']]
     });
     if (!categories) {
       res.status(404).json({ message: 'No categories!' })
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
       include: [{ model: Product }]
     });
     if (!category) {
-      res.status(404).json({ message: 'No category with this id!' });
+      res.status(404).json({ message: 'No category matches this id!', id: req.params.id });
       return;
     }
     res.status(200).json(category);
@@ -35,9 +36,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const category = await Category.create({
-      category_name: req.body.name,
+      category_name: req.body.category_name,
     });
-    res.status(200).json(category);
+    res.status(200).json({ message: 'Success! Category created.', category: category });
   } catch (err) {res.status(400).json(err)}
 });
 
@@ -46,30 +47,30 @@ router.put('/:id', async (req, res) => {
   try {
     const category = await Category.update(req.body, {
       where: {
-        id: req.params.id,
+        id: req.params.id
       },
     });
-    if (!category[0]) {
-      res.status(404).json({ message: 'No category matches this id!' });
+    if (!category) {
+      res.status(404).json({ message: 'No category matches that id!', id: req.params.id });
       return;
     }
-    res.status(200).json(category);
+    res.status(200).json({ message: 'Success! Category updated.', id: req.params.id });
   } catch (err) {res.status(500).json(err)}
 });
 
 /* Delete route for /api/categories/:id, deletes a category by its id value */
 router.delete('/:id', async (req, res) => {
   try {
-    const category = await Category.destroy(req.body, {
+    const category = await Category.destroy({
       where: {
         id: req.params.id,
       },
     });
-    if (!category[0]) {
-      res.status(404).json({ message: 'No category matches this id!' });
+    if (!category) {
+      res.status(404).json({ message: 'No category matches this id!', id: req.params.id });
       return;
     }
-    res.status(200).json({ message: 'Success! Category deleted.' });
+    res.status(200).json({ message: 'Success! Category deleted.', id: req.params.id });
   } catch (err) {res.status(500).json(err)}
 });
 
