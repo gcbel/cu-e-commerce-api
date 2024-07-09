@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
   try {
     const tag = await Tag.findByPk(req.params.id, {
       include: [{model: Product}]
-    })
+    });
     if (!tag) {
       res.status(404).json({ message: 'No tag with this id!' });
       return;
@@ -32,18 +32,43 @@ router.get('/:id', async (req, res) => {
 });
 
 /* Post route to /api/tags, creates a new tag */
-router.post('/', (req, res) => {
-
+router.post('/', async (req, res) => {
+  try {
+    const tag = await Tag.create(req.body)
+    res.status(200).json({ message: 'Success! Tag created.' })
+  } catch (err) {res.status(500).json(err)};
 });
 
-/* Put route to /api/categories/:id, updates a product by its id value */
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+/* Put route to /api/categories/:id, updates a tag by its id value */
+router.put('/:id', async (req, res) => {
+  try {
+    const tag = await Tag.update(req.body, {
+      where: {
+        id: req.params.id
+      },
+    });
+    if (!tag[0]) {
+      res.status(404).json({ message: 'No tag with that ID!' })
+      return;
+    }
+    res.status(200).json({ message: 'Success! Tag updated.' })
+  } catch (err) {res.status(500).json(err)};
 });
 
-/* Delete route for /api/product/:id, deletes a product by its id value */
-router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+/* Delete route for /api/product/:id, deletes a tag by its id value */
+router.delete('/:id', async (req, res) => {
+  try {
+    const tag = await Tag.destroy(req.body, {
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!tag[0]) {
+      res.status(404).json({ message: 'No tag with that ID!' })
+      return;
+    }
+    res.status(200).json({ message: 'Success! Tag deleted.' })
+  } catch (err) {res.status(500).json(err)};
 });
 
 /* EXPORTS */
