@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a command-line application that can be used manage a company's departments, roles, and employees. This project is created using Node.js, Inquirer, and PostgreSQL.
+This project is the back-end for an online shopping platform, including fully functional ways of creating, tracking, updating and deleting products, categories, and product tags. This project is created using Node.js, Express.js, Sequelize, and PostgreSQL.
 
 [Here]() is a video demonstrating the functionality of the application.
 
@@ -10,15 +10,30 @@ This project is a command-line application that can be used manage a company's d
 
 This application can be run locally. Once the repository has been cloned, ensure Node.js and PostgresSQL are installed on your system. To check if you have previously installed Node.js, run `node --version`. If installed, this command will display the version number. If no version number appears, you can download the Node.js from the official website [here](https://nodejs.org/en/download/package-manager). To check if you have previously installed Postgres, run `psql --version`. If installed, this command will display the version number. If not, you can download PostgresSQL from the official website [here](https://www.postgresql.org/download/).
 
-To download the package dependencies ([inquirer](https://www.npmjs.com/package/inquirer) and [pg](https://www.npmjs.com/package/pg)), run `npm install`.
+To download the package dependencies ([express](https://expressjs.com/), [sequelize](https://sequelize.org/), [pg](https://www.npmjs.com/package/pg), and [dotenv](https://www.npmjs.com/package/dotenv)), run `npm install`.
 
 ## Usage
 
-First, add a `.env` file that matches the `.env.EXAMPLE` file, and updated with your Postgres credentials.
+First, add a `.env` file that matches the `.env.EXAMPLE` file, updated with your Postgres credentials.
 
-To use the database, connect to Postgres using `psql -U postgres`, and once connected to Postgres, run `\i db/schema.sql`. In a separate terminal, the project can be run with `node index` or `node index.js`. The terminal will then prompt the user for desired actions.
+To use the database, connect to Postgres using `psql -U postgres`, and once connected to Postgres, run `\i db/schema.sql`. In a separate terminal, the database can be seeded with `npm run seed`, and the server can be started with `npm run start`.
 
-This application allows a user to add and delete departments, roles, and employees, as well as view all departments, roles, and employees that have been added. The application also supports updating an employee's role or manager. 
+The RESTful API supports the following routes:
+- `GET /api/categories`: Retrieve all categories and their associated products.
+- `GET /api/categories/:id`: Retrieve a category by its ID and its associated products.
+- `POST /api/categories`: Create a new category.
+- `PUT /api/categories/:id`: Update a category by its ID.
+- `DELETE /api/categories/:id`: Delete a category by its ID.
+- `GET /api/products`: Retrieve all products and their associated categories and tags.
+- `GET /api/products/:id`: Retrieve a product by its ID and its associated categories and tags.
+- `POST /api/products`: Create a new product.
+- `PUT /api/products/:id`: Update a product by its ID.
+- `DELETE /api/products/:id`: Delete a product by its ID.
+- `GET /api/tags`: Retrieve all tags and their associated products.
+- `GET /api/tags/:id`: Retrieve a tag by its ID and its associated products.
+- `POST /api/tags`: Create a new tag.
+- `PUT /api/tags/:id`: Update a tag by its ID.
+- `DELETE /api/tags/:id`: Delete a tag by its ID.
 
 ## Credits
 
