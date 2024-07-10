@@ -4,7 +4,7 @@
 
 This project is the back-end for an online shopping platform, which allows ways of creating, tracking, updating and deleting products, categories, and product tags. This project is created using Node.js, Express.js, Sequelize, and PostgreSQL.
 
-[Here]() is a video demonstrating the functionality of the application.
+[Here](https://drive.google.com/file/d/1tqUBr3-NzfnrairKndBGZMyRQx3LI4ht/view?usp=sharing) is a video demonstrating the functionality of the application.
 
 ## Installation
 
