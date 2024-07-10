@@ -1,2 +1,8 @@
-.DS_Store
+# Node
 node_modules
+
+# Environment
+.env
+
+# MacOS
+.DS_Store

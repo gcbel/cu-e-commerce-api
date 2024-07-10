@@ -16,7 +16,7 @@ To download the package dependencies ([express](https://expressjs.com/), [sequel
 
 First, add a `.env` file that matches the `.env.EXAMPLE` file, updated with your Postgres credentials.
 
-To use the database, connect to Postgres using `psql -U postgres`, and once connected to Postgres, run `\i db/schema.sql`. In a separate terminal, the database can be seeded with `npm run seed`, and the server can be started with `npm run start`.
+To use the database, connect to Postgres using `psql -U postgres`, and once connected to Postgres, run `\i db/schema.sql`. In a separate terminal, the database can be seeded with sample data with `npm run seed`, and the server can be started with `npm run start`.
 
 The RESTful API supports the following routes:
 - `GET /api/categories`: Retrieve all categories and their associated products.
