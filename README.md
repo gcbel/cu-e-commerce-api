@@ -37,7 +37,7 @@ The RESTful API supports the following routes:
 
 ## Credits
 
-Starter code provided by Columbia University Full-Stack Bootcamp: https://github.com/coding-boot-camp/bookish-sniffle <br>
+Legacy code by Columbia University: https://github.com/coding-boot-camp/bookish-sniffle <br>
 Reference for Sequelize models: https://sequelize.org/docs/v6/core-concepts/model-basics/ <br>
 Reference for Sequelize validation: https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/ <br>
 Reference for Sequelize associations: https://sequelize.org/docs/v6/core-concepts/assocs/
